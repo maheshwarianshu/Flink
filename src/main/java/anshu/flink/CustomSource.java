@@ -41,21 +41,8 @@ public class CustomSource extends RichSourceFunction<String>{
 		    @Override
 		    public void onSubscriptionData(SubscriptionData data) {
 		       for (AnyJson json : data.getMessages()) {
-		    	   JSONObject j;
-		    	   String output=null;
-		    	   if(params.has("xml")){
-						try {
-							j = new JSONObject(json.toString());
-							output = XML.toString(j);
-						} catch (JSONException e) {
-		
-							e.printStackTrace();
-						}
-		    	   }
-		    	   else{
-		    		   output = json.toString();
-		    	   }
-		           ctx.collect(output);
+
+		           ctx.collect(json.toString());
 		       }
 		    }
 		};
